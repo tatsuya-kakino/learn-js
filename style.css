@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html body {
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+}
+form, button, p {
+  margin: 0.4vh;
+}
+button {
+  padding: 0.3vh 1.5vw;
+}
+
