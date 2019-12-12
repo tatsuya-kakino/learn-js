@@ -119,7 +119,7 @@ module.exports = (env,argv ) => {
         }),
         new CleanWebpackPlugin({
           dry: false,
-          cleanOnceBeforeBuildPatterns: ['**/*', '!favicon.ico*','!video/**','!.vscode/**','!img/**', '!index.html*']
+          cleanOnceBeforeBuildPatterns: ['**/*','!video/**','!.vscode/**','!img/**', '!index.html*']
         })
     ],
     optimization: { //uglifyjs-webpack-plugin

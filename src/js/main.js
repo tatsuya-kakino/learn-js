@@ -1,15 +1,12 @@
 'use strict'
 //Style import
 import '../css/style.scss';
-// import { ObjectA } from './__module';
 
 (() => {
-  const ObjectA = function(){
-  }
-  ObjectA.prototype.getName = function() {
-    console.log(this.name);
-  }
-  const OBJ = new ObjectA();
-  const NAME = { name: "kakino" }
-  OBJ.getName.call(NAME)
+  let plusEnable = document.querySelectorAll(".parent .plus.enable");
+  let child = document.querySelectorAll(".parent + .child")
+  console.log(child[0])
+  plusEnable[0].addEventListener('click', () => {
+    child[0].style.display = "flex";
+  })
 })();
