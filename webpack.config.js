@@ -30,7 +30,7 @@ module.exports = (env,argv ) => {
   return {
     context: path.resolve(__dirname, 'src'),
     entry: {
-      main: './js/index.js'//,
+      main: './js/main.js'//,
       // login: './js/login.js',
       // loading: './js/loading.js'
     },
@@ -105,7 +105,7 @@ module.exports = (env,argv ) => {
         new HtmlWebPackPlugin({ //インスタンスを作成
           template:'../src/index.ejs', //使用するhtmlの雛形ファイルのパス
           filename:'index.html', //publicに出力されるhtmlファイルの名称
-          chunks:['loading'],
+          chunks:['main'],
           minify: {
             removeComments: true,
             collapseWhitespace: true,
