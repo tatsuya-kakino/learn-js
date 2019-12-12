@@ -9,13 +9,13 @@ const firebase = require("firebase");
 require("firebase/firestore");
 let devmode = false;
 
-let FB_API_KEY             = 'AIzaSyBX8T88R46v7yU5Q9KEh6YGUtl0qU4NYEs';
-let FB_AUTH_DOMAIN         = 'douraku-b37a6.firebaseapp.com';
-let FB_DATABASE_URL        = 'https://douraku-b37a6.firebaseio.com';
-let FB_PROJECT_ID          = 'douraku-b37a6';
-let FB_STORAGE_BUCKET      = 'douraku-b37a6.appspot.com';
-let FB_MESSAGING_SENDER_ID = '715806485661';
-let FB_ID = "1:715806485661:web:d45c4b17f0da3e80ba7874";
+// let FB_API_KEY             = 'AIzaSyBX8T88R46v7yU5Q9KEh6YGUtl0qU4NYEs';
+// let FB_AUTH_DOMAIN         = 'douraku-b37a6.firebaseapp.com';
+// let FB_DATABASE_URL        = 'https://douraku-b37a6.firebaseio.com';
+// let FB_PROJECT_ID          = 'douraku-b37a6';
+// let FB_STORAGE_BUCKET      = 'douraku-b37a6.appspot.com';
+// let FB_MESSAGING_SENDER_ID = '715806485661';
+// let FB_ID = "1:715806485661:web:d45c4b17f0da3e80ba7874";
 
 module.exports = (env,argv ) => {
   let devmode;
@@ -30,9 +30,9 @@ module.exports = (env,argv ) => {
   return {
     context: path.resolve(__dirname, 'src'),
     entry: {
-      main: './js/main.js',
-      login: './js/login.js',
-      loading: './js/loading.js'
+      main: './js/index.js'//,
+      // login: './js/login.js',
+      // loading: './js/loading.js'
     },
     output: {
       path: path.resolve(__dirname, 'public'),
@@ -86,7 +86,7 @@ module.exports = (env,argv ) => {
     },
     devServer: {
       contentBase: path.join(__dirname, 'public'),
-      openPage: './main.html',
+      openPage: './index.html',
       open: true,
       port: 9090,
       publicPath: '/',
