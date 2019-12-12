@@ -1,0 +1,51 @@
+{
+  "name": "douraku",
+  "version": "1.0.0",
+  "description": "<details><summary>メモ</summary>",
+  "main": "index.js",
+  "scripts": {
+    "debug": "webpack --mode development",
+    "build": "webpack --mode production",
+    "launch": "webpack-dev-server --open --mode production",
+    "start": "webpack-dev-server --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://cfy2@cfy2SakuraServer/home/cfy2/git-douraku"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.7.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "ejs": "^2.7.1",
+    "firebase": "^7.3.0",
+    "firebase-cli": "^1.2.0",
+    "firebase-tools": "^7.7.0",
+    "handlebars-loader": "^1.7.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.13.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack-progress-plugin": "^1.1.0"
+  }
+}
