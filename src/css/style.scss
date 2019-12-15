@@ -9,19 +9,14 @@ html body {
   font-size: 1vw;
   width: 100vw;
   height: 100vh;
-  background: #3f3f3f;
+  // background: #3f3f3f;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-#title {
-  font-size: 2vw;
-  margin: 1vh;
-  color: aquamarine;
-}
-.rowWrapper {
-  width: 20vw;
+.wrapper {
+  width: 30vw;
   height: auto;
   border: 1px solid #9f9f9f;
   border-radius: 0.5vh;
@@ -30,59 +25,13 @@ html body {
   justify-content: flex-start;
   overflow: hidden;
 }
-.parent {
-  padding: 1.5vh;
-  width: 22vw;
+ul,li{
+  list-style: none;
+}
+  li {
+  padding: 1vh 0vw;
+  // padding-left: 1vw;
+  width: 32vw;
   height: auto;
   border: 1px solid #9f9f9f;
-  background: #fafafa;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  position: relative;
-}
-#parent {
-  padding-left: 0.4vw;
-}
-.parent .enable{
-  font-weight: 900;
-  width: 1vw;
-  height: 1vw;
-  visibility: visible;
-}
-.parent .disable{
-  font-weight: 900;
-  width: 1vw;
-  height: 1vw;
-  visibility: hidden;
-}
-.child {
-  display: none;
-  padding: 1.5vh;
-  width: 22vw;
-  height: auto;
-  border: 1px solid #9f9f9f;
-  background: #fafafa;
-  // display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  position: relative;
-}
-#child {
-  padding-left: 0.4vw;
-}
-
-.child .enable{
-  font-weight: 900;
-  width: 1vw;
-  height: 1vw;
-  visibility: visible;
-  padding-left: 1.5vw;
-}
-.child .disable{
-  font-weight: 900;
-  width: 1vw;
-  height: 1vw;
-  visibility: hidden;
-  padding-left: 1.5vw;
 }
