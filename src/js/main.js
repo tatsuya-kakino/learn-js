@@ -13,7 +13,9 @@ import { type } from 'os';
     },
     parent2: "parent2",
     parent3: "parent3",
-    parent4: "parent4",
+    parent4: {
+      child3:"child3"
+    },
     parent5: "parent5"
   }
   function MY_OBJ(OBJ, SELECTOR){
@@ -42,8 +44,13 @@ import { type } from 'os';
       const li = `<li id="${ID}">${STR}</li>`
       return li;
     },
+    pWrap(STR, ID) {
+      const p = `<p id="${ID}">${STR}</p>`
+      return p;
+    },
     ulWrap(STR, ID) {
-      const ul = `<ul id="${ID}">${STR}</ul>`
+      const ul = `<ul id="${ID}>${STR}</ul>`
+      return ul;
     },
     increment: (() => {
       let counter = 0;
@@ -66,24 +73,187 @@ import { type } from 'os';
       return counter;
     }
   })();
-  // let count = increment()
-  let count = 1;
-   const getValue = (OBJECT) => {
-     for(let n in OBJECT){
-       let key = Object.keys(OBJECT);
-       const bool = typeof OBJECT[n];
-       if(bool === "object"){
-        console.log(`key: ${n}, count: ${count}`)
-        count++
-        getValue(OBJECT[n])
-      }else{
-        console.log(`key: ${n}, count: ${count}`)
 
-       }
-     }
-   }
-   const myObj = new MY_OBJ(obj, '.wrapper ul');
-   getValue(obj)
+  class Counter {
+    constructor(INIT){
+      this.INIT = INIT;
+    }
+    get(){
+      return this.INIT
+    }
+    increment(){
+      return this.INIT++;
+    }
+    decrement(){
+      return this.INIT--;
+    }
+  }
+  
+  class TreeView{
+    constructor(OBJECT, DOM) {
+      this.OBJECT = OBJECT;
+      this.LENGTH = Object.keys(OBJECT).length;
+      // this.DOM = document.querySelector(DOM);
+    }
+    tagWrap(STR, TAG, ID){
+      const result =  `<${TAG} id="${ID}">${STR}</${TAG}`;
+      return result;
+    }
+    render(TAG, DOM) {
+      return new Promise( (resolve, reject) => {
+        DOM.insertAdjacentHTML('beforeend', TAG);
+        return resolve()
+      }).then(()=> {return DOM} )
+    }
+    getKey(OBJECT, DOM) {
+      return new Promise( (resolve, reject) => {
+        for(let n in OBJECT){
+          const key = Object.keys(OBJECT)
+          let value = OBJECT[n];
+          const bool = typeof value;
+          if(bool === "object"){
+            value = n;
+            const id = `${value}`;
+            const p = this.tagWrap(value, "p", `p-${id}`);
+            const li = this.tagWrap(p, "li", `li-${id}`);
+            this.render(li, DOM);
+            const target = document.querySelector(`#p-${id}`);
+            target.classList.add(`nest${COUNT.get()}`)
+            target.style.paddingLeft = `${COUNT.get() * 2}vw`;
+          }else{
+            const id = `${value}`
+            const p = this.tagWrap(value, "p", `p-${id}`);
+            const li = this.tagWrap(p, "li", `li-${id}`);
+            this.render(li, DOM)
+            const target = document.querySelector(`#p-${id}`);
+            target.classList.add(`nest${COUNT.get()}`)
+            target.style.paddingLeft = `${COUNT.get() * 2}vw`
+          }
+        }
+        return resolve()
+      })//.then(()=> console.log('test'))
+    }
+    getDomArray(OBJECT) {
+      const objArray = []
+      COUNT.increment()
+      for(let n in OBJECT){
+        const key = Object.keys(OBJECT)
+        let value = OBJECT[n];
+        const bool = typeof value;
+        if(bool === "object"){
+          const target = document.querySelector(`#li-${n}`);
+          const object = value;
+          objArray.push([object, target])
+        }
+      }
+      console.log(objArray);
+      if(objArray.length === 0){
+        nestBool = true;
+        console.log(true)
+      }
+      // console.log(objArray);
+      // console.log(objArray.length);
+      // console.log(COUNT.get())
+      return objArray;
+    }
+    renderTree(OBJECT, DOM) {
+      this.getKey(OBJECT, DOM).then(()=> {
+        if(!nestBool){
+          const ary = this.getDomArray(OBJECT);
+          for(let n = 0;n < ary.length;n++){
+            // this.getKey(ary[n][0],ary[n][1])
+            this.renderTree(ary[n][0],ary[n][1])
+          }
+        }
+      })
+    }
+  }
+  let COUNT = new Counter(1);
+  let nestBool = false;
+  const wrapper = document.querySelector('.wrapper ul');
+  const treeView = new TreeView(obj, wrapper);
+  treeView.renderTree(obj, wrapper);  
+
+
+      // console.log(value)
+  //     // return value;
+  //   }
+  // } 
+
+
+  // let COUNT = new Counter(1);
+  // const RENDER = OBJECT => {
+  //   const length = Object.keys(OBJECT).length;
+  //   console.log(`length: ${length}`)
+  //   console.log(`COUNT: ${COUNT.get()}`)
+
+  //   for(let n in OBJECT){
+  //     const key = Object.keys(OBJECT)
+  //     const value = OBJECT[n];
+  //     const bool = typeof value;
+  //     if(bool === "object"){
+  //       return new Promise( (resolve, reject) => {
+  //         console.log(`nest: ${COUNT.get()}, key: ${n}`)
+  //         COUNT.increment();
+  //         RENDER(value)
+  //       })
+  //     }else if(bool === "string") {
+  //       console.log(`nest: ${COUNT.get()}, key: ${n}`)
+  //     }
+  //     if(length === COUNT.get()){
+  //       console.log("test")
+  //     }
+  //   }
+  // } 
+
+
+  // const length = Object.keys(obj).length;
+  // const getLastValue = OBJECT => {
+  //   const key = Object.keys(OBJECT)[0]
+  //   const value = OBJECT[key];
+  //   const bool = typeof value;
+    
+  //   if(bool === "object"){
+  //     COUNT = new Counter(COUNT.get());
+  //     COUNT.increment();
+  //     for(let n in value){
+  //       getLastValue(value)
+  //     }
+  //   }else{
+  //     console.log(`nest: ${COUNT.get()}, key: ${key}`)
+  //   }
+  // }
+  // getLastValue(obj)
+
+  // const myObj = new MY_OBJ(obj, '.wrapper ul');
+  // let count = 1;
+  // const RENDER = (OBJECT) => {
+  //   const length = myObj.length( OBJECT );
+  //   for(let n = 0;n < length;n++){
+  //     let key = Object.keys(OBJECT)[n];
+  //     const value = key;
+  //     const uniqueID = key;
+  //     const str = myObj.pWrap(value, uniqueID);
+  //     const tag = myObj.liWrap(str, `li-${uniqueID}`);
+  //     myObj.render(tag)
+  //     const DOM = document.querySelector(`#${uniqueID}`);
+  //     DOM.style.paddingLeft = `${count * 2 }vw`
+  //     let object = OBJECT[key]
+  //   }
+  // }
+  // RENDER(obj);
+  
+  // const OBJ_RENDER = (OBJECT) => {
+  //   const length = myObj.length( OBJECT );
+  //   RENDER(OBJECT)
+  //   for(let n = 0;n < length;n++){
+  //     let key = Object.keys(OBJECT)[n];
+  //     const bool = typeof OBJECT[key];
+  //   }
+  // }
+  //  OBJ_RENDER(obj)
+
+
   // function GET_VALUES (OBJECT, COUNT) {
   //   const length = myObj.length( OBJECT );
   //   for(let n = 0;n < length;n++){

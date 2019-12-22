@@ -19,7 +19,7 @@ html body {
   width: 30vw;
   height: auto;
   border: 1px solid #9f9f9f;
-  border-radius: 0.5vh;
+  border-radius: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -28,10 +28,15 @@ html body {
 ul,li{
   list-style: none;
 }
-  li {
-  padding: 1vh 0vw;
+p {
+  padding: 1vh 0;
+  border: 1px solid #9f9f9f;
+}
+li {
+  // padding: 1vh 0vw;
+  // margin: 1vh 0;
   // padding-left: 1vw;
   width: 32vw;
   height: auto;
-  border: 1px solid #9f9f9f;
+  // border: 1px solid #9f9f9f;
 }
