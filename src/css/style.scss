@@ -9,7 +9,7 @@ html body {
   font-size: 1vw;
   width: 100vw;
   height: 100vh;
-  // background: #3f3f3f;
+  background: #3f3f3f;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,6 +24,7 @@ html body {
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
+  background: #ffffff;
 }
 ul,li{
   list-style: none;

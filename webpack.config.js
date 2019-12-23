@@ -9,14 +9,6 @@ const firebase = require("firebase");
 require("firebase/firestore");
 let devmode = false;
 
-// let FB_API_KEY             = 'AIzaSyBX8T88R46v7yU5Q9KEh6YGUtl0qU4NYEs';
-// let FB_AUTH_DOMAIN         = 'douraku-b37a6.firebaseapp.com';
-// let FB_DATABASE_URL        = 'https://douraku-b37a6.firebaseio.com';
-// let FB_PROJECT_ID          = 'douraku-b37a6';
-// let FB_STORAGE_BUCKET      = 'douraku-b37a6.appspot.com';
-// let FB_MESSAGING_SENDER_ID = '715806485661';
-// let FB_ID = "1:715806485661:web:d45c4b17f0da3e80ba7874";
-
 module.exports = (env,argv ) => {
   let devmode;
   let isDevelopment = argv.mode === 'development';
@@ -93,15 +85,6 @@ module.exports = (env,argv ) => {
       watchContentBase: true,
     },
     plugins: [
-      // new webpack.DefinePlugin({
-      //   __FB_API_KEY__:             JSON.stringify(FB_API_KEY),
-      //   __FB_AUTH_DOMAIN__:         JSON.stringify(FB_AUTH_DOMAIN),
-      //   __FB_DATABASE_URL__:        JSON.stringify(FB_DATABASE_URL),
-      //   __FB_PROJECT_ID__:          JSON.stringify(FB_PROJECT_ID),
-      //   __FB_STORAGE_BUCKET__:      JSON.stringify(FB_STORAGE_BUCKET),
-      //   __FB_MESSAGING_SENDER_ID__: JSON.stringify(FB_MESSAGING_SENDER_ID),
-      //   __FB_ID__:JSON.stringify(FB_ID)
-      //   }),
         new HtmlWebPackPlugin({ //インスタンスを作成
           template:'../src/index.ejs', //使用するhtmlの雛形ファイルのパス
           filename:'index.html', //publicに出力されるhtmlファイルの名称
