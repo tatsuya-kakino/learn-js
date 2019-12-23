@@ -62,16 +62,27 @@ import { type } from 'os';
             const li = this.tagWrap(p, "li", `li-${id}`);
             this.render(li, DOM);
             const target = document.querySelector(`#p-${id}`);
-            target.classList.add(`nest${COUNT.get()}`)
+            const addClass = document.querySelector(`#li-${id}`);
+            addClass.classList.add(`nest${COUNT.get()}`)
+            // target.classList.add(`nest${COUNT.get()}`)
             target.style.paddingLeft = `${COUNT.get() * 2}vw`;
+            // if(COUNT.get() > 1){
+            //   target.classList.add('hidden')
+            // }
           }else{
             const id = `${value}`
             const p = this.tagWrap(value, "p", `p-${id}`);
             const li = this.tagWrap(p, "li", `li-${id}`);
             this.render(li, DOM)
             const target = document.querySelector(`#p-${id}`);
-            target.classList.add(`nest${COUNT.get()}`)
+            const addClass = document.querySelector(`#li-${id}`);
+            addClass.classList.add(`nest${COUNT.get()}`)
+            // target.classList.add(`nest${COUNT.get()}`)
             target.style.paddingLeft = `${COUNT.get() * 2}vw`
+            console.log()
+            // if(COUNT.get() > 1){
+            //   target.classList.add('hidden')
+            // }
           }
         }
         return resolve()
@@ -96,14 +107,25 @@ import { type } from 'os';
       return objArray;
     }
     renderTree(OBJECT, DOM) {
+
       this.getKey(OBJECT, DOM).then(()=> {
-        if(!nestBool){
-          const ary = this.getDomArray(OBJECT);
-          for(let n = 0;n < ary.length;n++){
-            this.renderTree(ary[n][0],ary[n][1])
+        return new Promise((resolve, reject) => {
+          if(!nestBool){
+            const ary = this.getDomArray(OBJECT);
+            for(let n = 0;n < ary.length;n++){
+              this.renderTree(ary[n][0],ary[n][1])
+              let count = COUNT.get();
+              return resolve(count);
+            }
           }
-        }
+        }).then((count) => {
+          const nest = document.querySelector(`.nest${count}`)
+          const parent = nest.parentNode;
+          // const tag = `<p>+</p>`
+          // parent.insertAdjacentHTML('afterbegin', tag);
+        })
       })
+      // console.log(COUNT.get())
     }
   }
   let COUNT = new Counter(1);
