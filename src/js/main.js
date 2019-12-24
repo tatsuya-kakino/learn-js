@@ -48,7 +48,10 @@ import { type } from 'os';
         return resolve()
       }).then(()=> {return DOM} )
     }
-
+    wrap(DOM, WRAPPER) {
+      DOM.before(WRAPPER);
+      WRAPPER.append(DOM);
+    }
     getKey(OBJECT, DOM) {
       return new Promise( (resolve, reject) => {
         for(let n in OBJECT){
@@ -79,7 +82,7 @@ import { type } from 'os';
             addClass.classList.add(`nest${COUNT.get()}`)
             // target.classList.add(`nest${COUNT.get()}`)
             target.style.paddingLeft = `${COUNT.get() * 2}vw`
-            console.log()
+            // console.log()
             // if(COUNT.get() > 1){
             //   target.classList.add('hidden')
             // }
@@ -97,6 +100,10 @@ import { type } from 'os';
         const bool = typeof value;
         if(bool === "object"){
           const target = document.querySelector(`#li-${n}`);
+          const targetChild = target.children[0]
+          const wrapper = document.createElement("div");
+          wrapper.className = `parentWrapper`;
+          this.wrap(targetChild, wrapper);
           const object = value;
           objArray.push([object, target])
         }
@@ -107,31 +114,28 @@ import { type } from 'os';
       return objArray;
     }
     renderTree(OBJECT, DOM) {
-
       this.getKey(OBJECT, DOM).then(()=> {
-        return new Promise((resolve, reject) => {
-          if(!nestBool){
-            const ary = this.getDomArray(OBJECT);
-            for(let n = 0;n < ary.length;n++){
-              this.renderTree(ary[n][0],ary[n][1])
-              let count = COUNT.get();
-              return resolve(count);
-            }
-          }
-        }).then((count) => {
-          const nest = document.querySelector(`.nest${count}`)
-          const parent = nest.parentNode;
-          // const tag = `<p>+</p>`
-          // parent.insertAdjacentHTML('afterbegin', tag);
-        })
+      if(!nestBool){
+        const ary = this.getDomArray(OBJECT);
+        for(let n = 0;n < ary.length;n++){
+          this.renderTree(ary[n][0],ary[n][1])
+        }
+      }
+      let count = COUNT.get();
       })
-      // console.log(COUNT.get())
+    }
+    parentPlus() {
+      const wrapperArray = document.querySelectorAll(".parentWrapper");
+      for(let i = 0;i < wrapperArray.length;i++){
+        const tag = `<p id="${wrapperArray[i]}-plus">+</p>`;
+        wrapperArray[i].insertAdjacentHTML('afterbegin', tag);
+      }
     }
   }
   let COUNT = new Counter(1);
   let nestBool = false;
   const wrapper = document.querySelector('.wrapper ul');
   const treeView = new TreeView(obj, wrapper);
-  treeView.renderTree(obj, wrapper);  
- 
+  treeView.renderTree(obj, wrapper); 
+  // treeView.parentPlus(); 
 })()

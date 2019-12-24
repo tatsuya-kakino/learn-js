@@ -30,6 +30,7 @@ ul,li{
   list-style: none;
 }
 p {
+  width: 32vw;
   padding: 1vh 0;
   border: 1px solid #9f9f9f;
 }
@@ -40,4 +41,7 @@ li {
 }
 .hidden {
   display: none;
+}
+.parentWrapper {
+  // display: flex;
 }
