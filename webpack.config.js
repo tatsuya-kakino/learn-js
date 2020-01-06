@@ -85,25 +85,25 @@ module.exports = (env,argv ) => {
       watchContentBase: true,
     },
     plugins: [
-        new HtmlWebPackPlugin({ //インスタンスを作成
-          template:'../src/index.ejs', //使用するhtmlの雛形ファイルのパス
-          filename:'index.html', //publicに出力されるhtmlファイルの名称
-          chunks:['main'],
-          minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeAttributeQuotes: true
-          },
-          chunksSortMode: 'dependency'
-        }),
-        new MiniCssExtractPlugin({ //mini-css-extract-pluginの設定
-          filename: 'style.[hash].css' //importしたcssファイルをすべてバンドルしてこの名称で出力する
-          // filename: 'style.css'
-        }),
-        new CleanWebpackPlugin({
-          dry: false,
-          cleanOnceBeforeBuildPatterns: ['**/*','!video/**','!.vscode/**','!img/**', '!index.html*']
-        })
+      new HtmlWebPackPlugin({ //インスタンスを作成
+        template:'../src/index.ejs', //使用するhtmlの雛形ファイルのパス
+        filename:'index.html', //publicに出力されるhtmlファイルの名称
+        chunks:['main'],
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeAttributeQuotes: true
+        },
+        chunksSortMode: 'dependency'
+      }),
+      new MiniCssExtractPlugin({ //mini-css-extract-pluginの設定
+        filename: 'style.[hash].css' //importしたcssファイルをすべてバンドルしてこの名称で出力する
+        // filename: 'style.css'
+      }),
+      new CleanWebpackPlugin({
+        dry: false,
+        cleanOnceBeforeBuildPatterns: ['**/*','!video/**','!.vscode/**','!img/**', '!index.html*']
+      })
     ],
     optimization: { //uglifyjs-webpack-plugin
       minimizer:[new UglifyJsPlugin({
